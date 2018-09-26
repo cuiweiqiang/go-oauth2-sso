@@ -3,20 +3,20 @@
 
 # 接口发布
 ## oauth2
-test.yourhost.com:3000/oauth/authorize?client_id=abc&response_type=code&redirect_uri=http://www.baidu.com&scope=read
-test.yourhost.com:3000/oauth/token?client_id=abc&client_secret=abc&grant_type=authorization_code&code=lM4RU738&redirect_uri=http://www.baidu.com
-test.yourhost.com:3000/oauth/check?access_token=xxxxx&username=xxxxxx
+`test.yourhost.com:3000/oauth/authorize?client_id=abc&response_type=code&redirect_uri=http://www.baidu.com&scope=read`
+`test.yourhost.com:3000/oauth/token?client_id=abc&client_secret=abc&grant_type=authorization_code&code=lM4RU738&redirect_uri=http://www.baidu.com`
+`test.yourhost.com:3000/oauth/check?access_token=xxxxx&username=xxxxxx`
 
 ## sso
-test.yourhost.com:5000/login?service=http://www.baidu.com
-test.yourhost.com:5000/serviceValidate?service=http://www.baidu.com&ticket=xxxxxxxxx
+`test.yourhost.com:5000/login?service=http://www.baidu.com`
+`test.yourhost.com:5000/serviceValidate?service=http://www.baidu.com&ticket=xxxxxxxxx`
 
 # 技术
 选用以下框架：
-go-martini
-martini-contrib
-go-redis
-go-sql-driver
+`go-martini`
+`martini-contrib`
+`go-redis`
+`go-sql-driver`
 
 # 配置
 ## sso
@@ -47,7 +47,10 @@ tgt及st超时时间使用redis ttl机制
 1. code:    OAUTH_CODE_xxxxxxxx
 code超时时间使用redis ttl机制
 mysql存储包括：
+
 oauth_client_details：
+
+```sql
 CREATE TABLE `oauth_client_details` (
   `client_id` varchar(100) NOT NULL,
   `client_secret` varchar(255) NOT NULL,
@@ -57,8 +60,11 @@ CREATE TABLE `oauth_client_details` (
   `client_logo` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`client_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+```
 
 oauth_token:
+
+```sql
 CREATE TABLE `oauth_token` (
   `token` varchar(255) NOT NULL,
   `client_id` varchar(100) NOT NULL,
@@ -69,5 +75,5 @@ CREATE TABLE `oauth_token` (
   `refresh_token` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`token`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
+```
 
